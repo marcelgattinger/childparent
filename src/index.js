@@ -1,17 +1,41 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { render } from 'react-dom';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function Parent ({name}) {
+	return (
+		<div>
+			<h1>Parent</h1>
+			<Child name={name}/>
+		</div>
+	)
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+function Child ({name}) {
+	return (
+		<div>
+			<h1>Child</h1>
+			<Grandchild name={name}/>
+		</div>
+	)
+}
+
+function Grandchild ({name}) {
+	return (
+		<div>
+			<h1>Grandchild</h1>
+			<h3>{name}</h3>
+		</div>
+	)
+}
+
+class App extends React.Component {
+	render() {
+		const name = "Marcel"
+
+		return (
+			<Parent name={name}/>
+		)
+	}
+}
+
+render (<App/>, document.getElementById('root'))
