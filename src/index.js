@@ -26,23 +26,31 @@ function Child () {
 	return (
 		<div>
 			<h1>Child</h1>
-			<Grandchild/>
+			<ConnectedGrandchild/>
 		</div>
 	)
 }
 
 function Grandchild ({name}) {
 	return (
-			<Context.Consumer>
-				{(name) => (
-					<div>
-						<h1>Grandchild</h1>
-						<h3>{name}</h3>
-					</div>
-					)
-				}
-			</Context.Consumer>
+		<div>
+			<h1>Grandchild</h1>
+			<h3>{name}</h3>
+		</div>
 	)
+}
+
+class ConnectedGrandchild extends React.Component {
+	render () {
+		return (
+			<Context.Consumer>
+				{(name) => {
+					return <Grandchild name={name}/>
+				}}
+			</Context.Consumer>
+		)
+		
+	}
 }
 
 class App extends React.Component {
