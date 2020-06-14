@@ -3,6 +3,16 @@ import { render } from 'react-dom';
 
 const Context = React.createContext();
 
+class Provider extends React.Component {
+	render(){
+		return(
+			<Context.Provider value={this.props.store}>
+				{this.props.children}
+			</Context.Provider>
+		)
+	}
+}
+
 function Parent () {
 	return (
 		<div>
@@ -37,14 +47,15 @@ function Grandchild ({name}) {
 
 class App extends React.Component {
 	render() {
-		const name = "Marcel"
-
 		return (
-			<Context.Provider value={name}>
-				<Parent name={name}/>
-			</Context.Provider>
+				<Parent/>
 		)
 	}
 }
 
-render (<App/>, document.getElementById('root'))
+const store = "Marcel"
+
+render (
+	<Provider store={store}>
+		<App/>
+	</Provider>, document.getElementById('root'))
